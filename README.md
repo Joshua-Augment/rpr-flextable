@@ -1,2 +1,4 @@
 # rpr-flextable
-React PDF Renderer Flex Table Builder
+## React PDF Renderer Flex Table Builder
+
+Quick flexbox-styled table builder for React PDF Wrapper. 
