@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, StyleSheet, Text} from '@react-pdf/renderer'
+import {View, StyleSheet} from '@react-pdf/renderer'
 import { Style } from "@react-pdf/types";
 import { borderType, calculateFlexWidths, isAllowedGroup, parseInput } from './core';
 import produce from "immer"
@@ -111,7 +111,7 @@ const FlexTable = (props: FlexTableProps) => {
               // First Cell
               if (cellIndex === 0) {
                 draft.borderLeft = cellBorderStyles[0] !== '' ? cellBorderStyles[0]  :  isChildRow ? nullBorder : outerBorder
-                draft.borderTop = cellBorderStyles[1] !== '' ? cellBorderStyles[1] : isFirstRow(rowIndex) ? nullBorder : innerBorder
+                draft.borderTop = cellBorderStyles[1] !== '' ? cellBorderStyles[1] : hasHeader() ? nullBorder : isFirstRow(rowIndex) ? nullBorder : innerBorder
                 draft.borderRight = cellBorderStyles[2] !== '' ? cellBorderStyles[2] : isChildRow && isLastCell(row,cellIndex) ? nullBorder : isLastCell(row,cellIndex) ? outerBorder : innerBorder
                 draft.borderBottom = cellBorderStyles[3] !== '' ? cellBorderStyles[3] : isChildRow ? nullBorder : isLastRow(items, rowIndex) ? outerBorder : innerBorder
               }
@@ -159,7 +159,7 @@ const FlexTable = (props: FlexTableProps) => {
               : cell.childRows
               ? generateRow(
                   cell.childRows,
-                  Number(widths[cellIndex].replace(/px/g, "")) - 10,
+                  Number(widths !== undefined && widths[cellIndex] !== undefined ? widths[cellIndex].replace(/px/g, "") : 0) - 10,
                   type, 
                   true
                 )
