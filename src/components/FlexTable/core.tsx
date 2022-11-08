@@ -276,7 +276,7 @@ export const calculateFlexWidths = (
     } else {
       return currentWidth;
     }
-  });
+  }).map(x => x ?? `${freeFlexWidth}px`);
 
   console.log("Final flex Table - ", widthTable);
   console.groupEnd();
